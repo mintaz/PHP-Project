@@ -12,10 +12,16 @@ class NhomTableSeeder extends Seeder
     public function run()
     {
         DB::table('nhom')->insert([
-            'nhom_ten' => 'Trái Cây Trong Nước',
+            'nhom_ten' => 'Thịt',
         ]);
         DB::table('nhom')->insert([
-            'nhom_ten' => 'Trái Cây Nước Ngoài',
+            'nhom_ten' => 'Rau',
+        ]);
+        DB::table('nhom')->insert([
+            'nhom_ten' => 'Hoa quả',
+        ]);
+        DB::table('nhom')->insert([
+            'nhom_ten' => 'Thực phẩm khô',
         ]);
     }
 }

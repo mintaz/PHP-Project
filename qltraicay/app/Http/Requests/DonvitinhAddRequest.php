@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\Request;
 
-class DonvitinhAddRequest extends FormRequest
+class DonvitinhAddRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class DonvitinhAddRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,14 @@ class DonvitinhAddRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'txtDVTName'    => 'required|unique:donvitinh,donvitinh_ten'
+        ];
+    }
+
+    public function messages() {
+        return [
+            'txtDVTName.required'   => '<div><strong  style="color: red;">Vui lòng không để trống trường này!</strong></div>',
+            'txtDVTName.unique'     => '<div><strong  style="color: red;">Dữ liệu này đã tồn tại!</strong></div>'
         ];
     }
 }

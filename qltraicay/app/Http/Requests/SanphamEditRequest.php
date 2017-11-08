@@ -2,29 +2,30 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\Request;
 
-class SanphamEditRequest extends FormRequest
+class SanphamEditRequest extends Request
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
     public function rules()
     {
         return [
-            //
+            'txtSPName'  => 'required',
+            'txtSPSignt' => 'required|size:5',
+            'txtSPCate'  => 'required',
+            'txtSPUnit'  => 'required',
+            'txtSPIntro' => 'required',
+        ];
+    }
+
+    public function messages() {
+        return [
+            'required'   => '<div><strong  style="color: red;">Vui lòng không để trống trường này!</strong></div>',
+            'txtSPSignt.size'   => '<div><strong  style="color: red;">Độ dài dữ liệu trường này là 5!</strong></div>'
         ];
     }
 }

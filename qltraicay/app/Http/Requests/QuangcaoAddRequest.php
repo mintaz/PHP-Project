@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\Request;
 
-class QuangcaoAddRequest extends FormRequest
+class QuangcaoAddRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class QuangcaoAddRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,16 @@ class QuangcaoAddRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'txtNName'    => 'required',
+            'fImage' => 'required|mimes:jpeg,bmp,png|max:4000'
+        ];
+    }
+
+    public function messages() {
+        return [
+            'txtNName.required'   => '<div><strong  style="color: red;">Vui lòng không để trống trường này!</strong></div>',
+            'mimes' => '<div><strong  style="color: red;">Vui lòng chọn đúng file ảnh</strong></div>',
+            'fImage.max' => '<div><strong  style="color: red;">Vui lòng chọn file ảnh có kích thước không quá 2MB</strong></div>'
         ];
     }
 }

@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\Request;
 
-class BinhluanRequest extends FormRequest
+class BinhluanRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.

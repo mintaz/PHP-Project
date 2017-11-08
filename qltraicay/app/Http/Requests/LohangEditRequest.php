@@ -2,29 +2,32 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\Request;
 
-class LohangEditRequest extends FormRequest
+class LohangEditRequest extends Request
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
     public function rules()
     {
         return [
-            //
+            'txtLHSignt'  => 'required|size:5',
+            'txtLHShelf' => 'required|integer',
+            'txtLHQuant'  => 'required|integer',
+            'txtLHBuyPrice'  => 'required',
+            'txtLHSalePrice' => 'required',
+        ];
+    }
+
+    public function messages() {
+        return [
+            'required'   => '<div><strong  style="color: red;">Vui lòng không để trống trường này!</strong></div>',
+            
+            'txtLHSignt.size'   => '<div><strong  style="color: red;">Độ dài dữ liệu trường này là 5!</strong></div>',
+            'integer'   => '<div><strong  style="color: red;">Kiểu dữ liệu không phù hợp!</strong></div>'
         ];
     }
 }

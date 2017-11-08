@@ -111,9 +111,9 @@ class HomeController extends Controller
     {
         $data = ['mail'=>Request::input('txtMail'),'name'=>Request::input('txtName'),'content'=>Request::input('txtContent')];
         Mail::send('auth.emails.layoutmail', $data, function ($message) {
-            $message->from('traicayvlu@gmail.com', 'Khách hàng');
+            $message->from('nongsancantho@gmail.com', 'Khách hàng');
         
-            $message->to('traicayvlu@gmail.com', 'Admin');
+            $message->to('nongsancantho@gmail.com', 'Admin');
         
             $message->subject('Mail liên hệ!!!');
         });
@@ -273,19 +273,19 @@ class HomeController extends Controller
             ];
         // print_r($donhang);
         Mail::send('auth.emails.hoadon', $donhang, function ($message) use ($donhang) {
-            $message->from('traicayvlu@gmail.com', 'ADMIN');
+            $message->from('nongsancantho@gmail.com', 'ADMIN');
         
             $message->to($donhang['khachhang_email'], 'a');
         
-            $message->subject('Hóa đơn mua hàng tại Cửa hàng Trái Cây VLU');
+            $message->subject('Hóa đơn mua hàng tại Cửa hàng Nông sản sạch CT!!!');
         });
 
         Mail::send('auth.emails.hoadon', $donhang, function ($message) use ($donhang) {
-            $message->from('traicayvlu@gmail.com', 'ADMIN');
+            $message->from('nongsancantho@gmail.com', 'ADMIN');
         
-            $message->to('traicayvlu@gmail.com', 'KHÁCH HÀNG');
+            $message->to('nongsancantho@gmail.com', 'KHÁCH HÀNG');
         
-            $message->subject('Hóa đơn mua hàng tại Cửa hàng Trái Cây VLU');
+            $message->subject('Hóa đơn mua hàng tại Cửa hàng Nông sản sạch CT!!!');
         });
 
         Cart::destroy();

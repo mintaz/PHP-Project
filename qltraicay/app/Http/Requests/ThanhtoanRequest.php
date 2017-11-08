@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\Request;
 
-class ThanhtoanRequest extends FormRequest
+class ThanhtoanRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class ThanhtoanRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,17 @@ class ThanhtoanRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'txtNNName'  => 'required',
+            'txtNNPhone' => 'required',
+            'txtNNAddr'  => 'required',
+            'txtNNEmail'  => 'required|regex:^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})^'
+        ];
+    }
+
+    public function messages() {
+        return [
+            'required'   => '<div><strong  style="color: red;">Vui lòng không để trống trường này!</strong></div>',
+            'txtNNEmail.regex'   => '<div><strong  style="color: red;">Email không đúng định dạng!!</strong></div>'
         ];
     }
 }

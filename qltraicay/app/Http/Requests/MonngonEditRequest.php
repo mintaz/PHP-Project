@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\Request;
 
-class MonngonEditRequest extends FormRequest
+class MonngonEditRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class MonngonEditRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,15 @@ class MonngonEditRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'txtMNTittle'  => 'required',
+            'txtMNResum'  => 'required',
+            'txtMNContent' => 'required'
+        ];
+    }
+
+    public function messages() {
+        return [
+            'required'   => '<div><strong  style="color: red;">Vui lòng không để trống trường này!</strong></div>'
         ];
     }
 }
