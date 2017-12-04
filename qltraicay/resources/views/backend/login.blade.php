@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Đồ án quản lý bán hàng QTT SHOP</title>
+    <title>FruitStoreVLU</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="{{ url('public/backend/bower_components/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -23,7 +23,7 @@
 
 <body>
     <br><br><br><br><br><br>
-    <div><h1><center><b>QTT SHOP</b></center></h1></div>
+    <div><h1><center><b>FruitStore VLU</b></center></h1></div>
     <div><h2><center>Bảng điều khiển</center></h2></div>
     <div class="container">
         <div class="row">

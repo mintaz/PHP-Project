@@ -29,13 +29,20 @@ class HomeController extends Controller
      */
     public function demo()
     {
-        $data = DB::table('sanpham')
+        // $data = DB::table('sanpham')
+        // ->where('sanpham_ten','like','Mít Sấy')
+        //     ->join('lohang', 'sanpham.id', '=', 'lohang.sanpham_id')
+        //     ->select(DB::raw('max(lohang.id) as lomoi'),'sanpham.id','sanpham.sanpham_ten','sanpham.sanpham_url','sanpham.sanpham_khuyenmai','sanpham.sanpham_anh', 'lohang.lohang_so_luong_nhap','lohang.lohang_so_luong_hien_tai','lohang.lohang_gia_ban_ra')
+        //         ->groupBy('sanpham.id')
+        //     ->get();
+        $sanpham = DB::table('sanpham')
             ->join('lohang', 'sanpham.id', '=', 'lohang.sanpham_id')
             ->select(DB::raw('max(lohang.id) as lomoi'),'sanpham.id','sanpham.sanpham_ten','sanpham.sanpham_url','sanpham.sanpham_khuyenmai','sanpham.sanpham_anh', 'lohang.lohang_so_luong_nhap','lohang.lohang_so_luong_hien_tai','lohang.lohang_gia_ban_ra')
                 ->groupBy('sanpham.id')
-            ->get();
+                ->orderBy('id','DESC')
+            ->paginate(12);
         // $idLHM = Db::table('lohang')->where('sanpham_id',$val->sanpham_id)->max('id');
-            print_r($data);
+            print_r($sanpham);
     }
 
 
@@ -111,9 +118,9 @@ class HomeController extends Controller
     {
         $data = ['mail'=>Request::input('txtMail'),'name'=>Request::input('txtName'),'content'=>Request::input('txtContent')];
         Mail::send('auth.emails.layoutmail', $data, function ($message) {
-            $message->from('nongsancantho@gmail.com', 'Khách hàng');
+            $message->from('vlustore@gmail.com', 'Khách hàng');
         
-            $message->to('nongsancantho@gmail.com', 'Admin');
+            $message->to('vlustore@gmail.com', 'Admin');
         
             $message->subject('Mail liên hệ!!!');
         });
@@ -273,7 +280,7 @@ class HomeController extends Controller
             ];
         // print_r($donhang);
         Mail::send('auth.emails.hoadon', $donhang, function ($message) use ($donhang) {
-            $message->from('nongsancantho@gmail.com', 'ADMIN');
+            $message->from('fruitvlu@gmail.com', 'ADMIN');
         
             $message->to($donhang['khachhang_email'], 'a');
         
@@ -281,9 +288,9 @@ class HomeController extends Controller
         });
 
         Mail::send('auth.emails.hoadon', $donhang, function ($message) use ($donhang) {
-            $message->from('nongsancantho@gmail.com', 'ADMIN');
+            $message->from('fruitvlu@gmail.com', 'ADMIN');
         
-            $message->to('nongsancantho@gmail.com', 'KHÁCH HÀNG');
+            $message->to('fruitvlu@gmail.com', 'KHÁCH HÀNG');
         
             $message->subject('Hóa đơn mua hàng tại Cửa hàng Nông sản sạch CT!!!');
         });
@@ -316,14 +323,15 @@ class HomeController extends Controller
 
     public function postFind()
     {
-        $keyword = Request::input('txtSeach');
+        $keyword = Request::get('txtSeach');
         $sanpham = DB::table('sanpham')
-            ->where('sanpham_ten','like',$keyword)
-            ->orWhere('sanpham_url','like',$keyword)
+            ->where('sanpham_ten','LIKE',"%{$keyword}%")
             ->join('lohang', 'sanpham.id', '=', 'lohang.sanpham_id')
             ->select(DB::raw('max(lohang.id) as lomoi'),'sanpham.id','sanpham.sanpham_ten','sanpham.sanpham_url','sanpham.sanpham_khuyenmai','sanpham.sanpham_anh', 'lohang.lohang_so_luong_nhap','lohang.lohang_so_luong_hien_tai','lohang.lohang_gia_ban_ra')
                 ->groupBy('sanpham.id')
-            ->paginate(15);
+                ->orderBy('id','DESC')
+            ->paginate(12);
+            //return printf($sanpham);
         return view('frontend.pages.product',compact('sanpham'));
     }
 }

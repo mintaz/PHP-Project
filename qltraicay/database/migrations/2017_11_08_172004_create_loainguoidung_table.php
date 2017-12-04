@@ -13,7 +13,7 @@ class CreateLoainguoidungTable extends Migration
      */
     public function up()
     {
-        Schema::create('loainguoidung', function (Blueprint $table) {
+        	Schema::create('loainguoidung', function (Blueprint $table) {
             $table->increments('id');
             $table->string('loainguoidung_ten',40);
             $table->timestamps();

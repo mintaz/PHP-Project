@@ -58,7 +58,7 @@
                     <a class="aa-add-card-btn" href="{!! url('mua-hang',[$item->id,$item->sanpham_url]) !!}"><span class="fa fa-shopping-cart"></span>Mua ngay</a>
                     <figcaption>
                       <h4 class="aa-product-title"><a href="{!! url('san-pham',$item->sanpham_url) !!}">{!! $item->sanpham_ten !!}</a></h4>
-                      <!-- <span class="aa-product-price">{!! number_format("$item->lohang_gia_ban_ra",0,",",".") !!}vnđ</span> -->
+                      <span class="aa-product-price">{!! number_format("$item->lohang_gia_ban_ra",0,",",".") !!}vnđ</span>
                     </figcaption>
                   </figure>                         
                   @if ($item->sanpham_khuyenmai == 1)
@@ -90,8 +90,7 @@
             
             @include('frontend.blocks.spbanchay')
              <!-- sidebar 2 -->
-            @include('frontend.blocks.news')
-          
+
           </aside>
         </div>
        
@@ -99,6 +98,8 @@
     </div>
   </section>
   <!-- / product category -->
+              @include('frontend.blocks.news')
+          
   <!-- Footer -->
 @include('frontend.blocks.footer')
 <!-- / Footer -->
